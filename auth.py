@@ -21,3 +21,14 @@ def verify_password(plain_password, hashed_password):
     return bcrypt.checkpw(password_bytes, hashed_bytes)
 
 
+def user_exists(username):
+    if not os.path.exists("user.txt"):
+        return False
+    with open ("user.txt", "r") as file:
+         for line in file:
+            stored_username = line.strip().split(",")[0]
+            if stored_username == username:
+                return True
+    return False
+        
+
